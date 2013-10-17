@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import javax.swing.ImageIcon;
-import jobbeet.common.constants.Keys;
-import jobbeet.common.constants.Names;
+import jobeet.common.constants.Keys;
+import jobeet.common.constants.Names;
 import jobeet.common.interfaces.ILogger;
 import jobeet.common.managers.DependencyManager;
 

@@ -1,4 +1,4 @@
-package jobbeet.common.constants;
+package jobeet.common.constants;
 
 /**
  * Constants for names, such as scene names, file names etc.

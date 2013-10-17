@@ -1,4 +1,4 @@
-package jobbeet.common.constants;
+package jobeet.common.constants;
 
 /**
  * Constants for key names in .properties files, array keys, index keys etc.

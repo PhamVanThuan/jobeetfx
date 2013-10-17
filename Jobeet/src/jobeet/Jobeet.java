@@ -5,12 +5,13 @@
 package jobeet;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import jobeet.common.constants.Names;
+import jobeet.common.interfaces.ILogger;
+import jobeet.common.managers.DependencyManager;
+import jobeet.common.util.ApplicationContext;
+import jobeet.common.util.PubSub;
+import jobeet.ui.ScreenManager;
 
 /**
  *
@@ -18,25 +19,39 @@ import javafx.stage.Stage;
  */
 public class Jobeet extends Application {
     
+    private Stage m_Stage;
+    private ApplicationContext m_Context;
+    private ILogger m_DebugLogger;
+    private ILogger m_ErrorLogger;
+    private Bootstrapper m_Bootstrapper;
+    private ScreenManager m_ScreenManager;
+    
+    public Jobeet()
+    {
+        m_Bootstrapper = new Bootstrapper();
+        m_Bootstrapper.registerLoggers();
+        m_DebugLogger = (ILogger)DependencyManager.resolveBean(Names.Loggers.DEBUG);
+        m_ErrorLogger = (ILogger)DependencyManager.resolveBean(Names.Loggers.ERROR);
+    }
+    
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try {
+            PubSub.subscribe(this);
+            m_Stage = primaryStage;
+            m_Bootstrapper.registerDependencies();
+            m_ScreenManager = new ScreenManager(m_Stage);
+            m_Context = ApplicationContext.instance();
+            m_Stage.show();
+
+            // Must call sizeToScene() after show() so that main window with setResizable(false)
+            // won't have extra height and width than expected.
+            m_Stage.sizeToScene();
+
+        } catch (Exception ex) {
+            m_ErrorLogger.error(null, ex);
+            m_DebugLogger.error(null, ex);
+        }
     }
 
     /**

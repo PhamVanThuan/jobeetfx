@@ -1,0 +1,45 @@
+.root {
+    -fx-font: 12px "Tahoma";
+}
+
+.fieldset {
+    -fx-border-insets: 20 10 10 10;
+    -fx-background-color: transparent;    
+    -fx-border-width: 1;
+    -fx-border-color: #999;
+    -fx-border-radius: 5;
+}
+
+.label {
+    -fx-background-color: white;
+    -fx-padding: 5
+}
+
+.tab-pane {
+    -fx-border-width: 2;
+    -fx-border-color: #666;
+}
+
+.tree-view {
+    -fx-background-color: transparent;
+}
+
+.tree-view:focused {
+    -fx-border-width: 0;
+}
+
+.tree-cell {
+    -fx-background-color: transparent;
+}
+
+.tree-cell:focused {
+    -fx-background-color: -fx-focus-color;
+}
+
+.blocking-pane__overlay {
+    -fx-background-color: black;
+}
+
+.blocking-pane .label {
+    -fx-background-color: white;
+}

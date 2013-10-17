@@ -7,7 +7,7 @@ import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import jobbeet.common.constants.Keys;
+import jobeet.common.constants.Keys;
 
 
 /**

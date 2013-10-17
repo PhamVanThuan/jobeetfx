@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
-import jobbeet.common.constants.Values;
+import jobeet.common.constants.Values;
 
 
 /**

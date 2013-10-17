@@ -1,4 +1,4 @@
-package jobbeet.common.constants;
+package jobeet.common.constants;
 
 /**
  * Constant for general values.
