@@ -42,6 +42,10 @@ public class Jobeet extends Application {
             m_Bootstrapper.registerDependencies();
             m_ScreenManager = new ScreenManager(m_Stage);
             m_Context = ApplicationContext.instance();
+            
+            //load home scene
+            m_ScreenManager.loadHomeScene();
+            
             m_Stage.show();
 
             // Must call sizeToScene() after show() so that main window with setResizable(false)

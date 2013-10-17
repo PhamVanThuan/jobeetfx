@@ -20,6 +20,7 @@ import jobeet.common.util.PubSub;
 import jobeet.ui.common.ModuleBase;
 import jobeet.ui.common.UIHelper;
 import jobeet.ui.events.SceneRequestingEvent;
+import jobeet.ui.home.HomeController;
 
 
 /**
@@ -46,33 +47,19 @@ public class ScreenManager {
         m_Stage.setScene(scene);
     }
 
-    public void loadLoginScene() {
+    public void loadHomeScene() {
         m_Stage.setResizable(false);
+        HomeController homeUI = new HomeController(m_RootPane);
         String title = LanguageHelper.getString(Keys.Language.LOGIN);
+        replaceSceneContent(homeUI);
         m_Stage.setTitle(m_AppContext.appendApplicationTitle(title));
     }
-
-    public void loadMainScene() {
-        final int OFFSET_LEFT = 100;
-        final int OFFSET_TOP = 50;
-
-       
-        m_Stage.setTitle(m_AppContext.appendApplicationTitle("Welcome"));
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        m_Stage.setResizable(true);
-        m_Stage.setWidth((screenBounds.getWidth() - OFFSET_LEFT * 2) * 0.75);
-        m_Stage.setHeight(screenBounds.getHeight()- OFFSET_TOP * 2);
-        m_Stage.setX(OFFSET_LEFT);
-        m_Stage.setY(OFFSET_TOP);
-    }
-
-
 
     @Subscribe
     public void OnSceneRequested(SceneRequestingEvent event) {
         switch (event.getRequestedScene()) {
             case LOGIN:
-                loadLoginScene();
+                loadHomeScene();
                 break;
         }
     }
