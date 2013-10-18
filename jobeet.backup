@@ -1,0 +1,215 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.4
+-- Dumped by pg_dump version 9.2.4
+-- Started on 2013-10-18 16:07:17
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 172 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1942 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 170 (class 1259 OID 26060)
+-- Name: category; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE category (
+    id integer NOT NULL,
+    name text
+);
+
+
+ALTER TABLE public.category OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 26063)
+-- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.category_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1943 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE category_id_seq OWNED BY category.id;
+
+
+--
+-- TOC entry 168 (class 1259 OID 26051)
+-- Name: job; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE job (
+    id integer NOT NULL,
+    category_id integer,
+    type text
+);
+
+
+ALTER TABLE public.job OWNER TO postgres;
+
+--
+-- TOC entry 169 (class 1259 OID 26054)
+-- Name: job_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE job_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.job_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1944 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: job_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE job_id_seq OWNED BY job.id;
+
+
+--
+-- TOC entry 1925 (class 2604 OID 26065)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category ALTER COLUMN id SET DEFAULT nextval('category_id_seq'::regclass);
+
+
+--
+-- TOC entry 1924 (class 2604 OID 26056)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY job ALTER COLUMN id SET DEFAULT nextval('job_id_seq'::regclass);
+
+
+--
+-- TOC entry 1933 (class 0 OID 26060)
+-- Dependencies: 170
+-- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY category (id, name) FROM stdin;
+1	IT
+2	Dev
+\.
+
+
+--
+-- TOC entry 1945 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('category_id_seq', 2, true);
+
+
+--
+-- TOC entry 1931 (class 0 OID 26051)
+-- Dependencies: 168
+-- Data for Name: job; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY job (id, category_id, type) FROM stdin;
+3	1	IT
+4	1	Dev
+\.
+
+
+--
+-- TOC entry 1946 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: job_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('job_id_seq', 4, true);
+
+
+--
+-- TOC entry 1927 (class 2606 OID 26074)
+-- Name: id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY job
+    ADD CONSTRAINT id PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1929 (class 2606 OID 26076)
+-- Name: pk_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY category
+    ADD CONSTRAINT pk_id PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1930 (class 2606 OID 26077)
+-- Name: fk_category_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY job
+    ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES category(id);
+
+
+--
+-- TOC entry 1941 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-10-18 16:07:18
+
+--
+-- PostgreSQL database dump complete
+--
+
