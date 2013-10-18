@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import jobeet.common.interfaces.serviceproviders.IJobServiceProvider;
 import jobeet.ui.common.ModuleBase;
 
 /**
@@ -20,10 +21,14 @@ public class HomeController  extends ModuleBase {
 
     private final static String VIEW_PATH = "Home.fxml";
     private BorderPane m_BorderPane;
+    private IJobServiceProvider m_JobProvider;
     
-    public HomeController(StackPane rootPane)
+    public HomeController(StackPane rootPane, IJobServiceProvider jobProvider)
     {
         super(rootPane);
+        m_JobProvider = jobProvider;
+        System.err.println("JobProvider " + m_JobProvider.getJob(1));
+        
     }
     
     private void initComponent() {

@@ -6,8 +6,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 import jobeet.common.constants.Names;
 import jobeet.common.constants.Values;
 import jobeet.common.interfaces.ILogger;
+import jobeet.common.interfaces.datalayers.IJobDataLayer;
+import jobeet.common.interfaces.factories.IConnectionFactory;
+import jobeet.common.interfaces.serviceproviders.IJobServiceProvider;
 import jobeet.common.managers.DependencyManager;
 import jobeet.impl.common.Log4jLogger;
+import jobeet.impl.datalayers.JobDataLayer;
+import jobeet.impl.factories.PostgressConnectionFactory;
+import jobeet.impl.serviceproviders.JobServiceProvider;
 
 
 
@@ -30,7 +36,35 @@ public class Bootstrapper {
     public void registerDependencies()
             throws ClassNotFoundException {
         
+        IConnectionFactory factory = registerConnectionFactory();
+        IJobDataLayer jobDataLayer = new JobDataLayer(factory);
+        IJobServiceProvider jobProvider = new JobServiceProvider(jobDataLayer);
+        
+        DependencyManager.registerInstance(IJobDataLayer.class, jobDataLayer);
+        DependencyManager.registerInstance(IJobServiceProvider.class, jobProvider);
+    }
+    
+    /**
+     * Registers new ConnectionFactory instance in case user changes settings.
+     *
+     * @throws ClassNotFoundException If database driver class cannot be found.
+     */
+    public IConnectionFactory registerConnectionFactory()
+            throws ClassNotFoundException {
+       
+        String dbAddress = "localhost";
+        String dbDriver = "org.postgresql.Driver";
+        String dbName = "jobeet";
+        String dbPassword = "thuan.123";
+        String dbUsername = "postgres";
+        int dbPort = 5432;
 
+        IConnectionFactory factory = new PostgressConnectionFactory(dbAddress, dbPort, dbName, dbUsername,
+            dbPassword, dbDriver);
+        
+        DependencyManager.registerInstance(IConnectionFactory.class, factory);
+
+        return factory;
     }
 
     public void registerLoggers() {

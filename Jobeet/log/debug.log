@@ -1,0 +1,17 @@
+2013-10-18 13:57:10 ERROR debug:144 - 
+java.lang.UnsupportedOperationException: Not supported yet.
+	at jobeet.impl.datalayers.JobDataLayer.getJob(JobDataLayer.java:44)
+	at jobeet.impl.serviceproviders.JobServiceProvider.getJob(JobServiceProvider.java:29)
+	at jobeet.ui.home.HomeController.<init>(HomeController.java:30)
+	at jobeet.ui.ScreenManager.loadHomeScene(ScreenManager.java:54)
+	at jobeet.Jobeet.start(Jobeet.java:47)
+	at com.sun.javafx.application.LauncherImpl$5.run(LauncherImpl.java:319)
+	at com.sun.javafx.application.PlatformImpl$5.run(PlatformImpl.java:215)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:179)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(PlatformImpl.java:176)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl$4.run(PlatformImpl.java:176)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.access$100(WinApplication.java:29)
+	at com.sun.glass.ui.win.WinApplication$3$1.run(WinApplication.java:73)
+	at java.lang.Thread.run(Thread.java:724)

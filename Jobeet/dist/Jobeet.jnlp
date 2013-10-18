@@ -11,9 +11,9 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Jobeet.jar" size="23458" download="eager" />
-    <jar href="lib/Jobeet_Common.jar" size="43381" download="eager" />
-    <jar href="lib/Jobeet_Impl.jar" size="4843" download="eager" />
+    <jar href="Jobeet.jar" size="24435" download="eager" />
+    <jar href="lib/Jobeet_Common.jar" size="52090" download="eager" />
+    <jar href="lib/Jobeet_Impl.jar" size="15071" download="eager" />
     <jar href="lib/Jobeet_UI_Common.jar" size="114691" download="eager" />
     <jar href="lib/antlr-2.7.7.jar" size="445288" download="eager" />
     <jar href="lib/commons-lang.jar" size="207723" download="eager" />

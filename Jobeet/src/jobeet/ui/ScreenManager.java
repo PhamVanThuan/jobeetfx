@@ -10,10 +10,10 @@ import javafx.scene.layout.Pane;
 
 import com.google.common.eventbus.Subscribe;
 import javafx.collections.ObservableList;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 import jobeet.common.constants.Keys;
+import jobeet.common.interfaces.serviceproviders.IJobServiceProvider;
+import jobeet.common.managers.DependencyManager;
 import jobeet.common.util.ApplicationContext;
 import jobeet.common.util.LanguageHelper;
 import jobeet.common.util.PubSub;
@@ -33,6 +33,8 @@ public class ScreenManager {
     private String[] m_CssFiles;
     private ApplicationContext m_AppContext;
     private StackPane m_RootPane;
+    
+    private IJobServiceProvider m_JobProvider;
 
     public ScreenManager(Stage stage) throws MalformedURLException {
         m_Stage = stage;
@@ -49,7 +51,7 @@ public class ScreenManager {
 
     public void loadHomeScene() {
         m_Stage.setResizable(false);
-        HomeController homeUI = new HomeController(m_RootPane);
+        HomeController homeUI = new HomeController(m_RootPane, m_JobProvider);
         String title = LanguageHelper.getString(Keys.Language.LOGIN);
         replaceSceneContent(homeUI);
         m_Stage.setTitle(m_AppContext.appendApplicationTitle(title));
@@ -65,7 +67,7 @@ public class ScreenManager {
     }
 
     private void resolveDependencies() {
-       
+        m_JobProvider = DependencyManager.resolveInstance(IJobServiceProvider.class);
     }
 
     private <T extends ModuleBase> void replaceSceneContent(T viewWrapper) {
