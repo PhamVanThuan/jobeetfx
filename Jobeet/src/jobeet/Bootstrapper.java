@@ -23,10 +23,11 @@ import jobeet.impl.serviceproviders.JobServiceProvider;
  */
 public class Bootstrapper {
 
-    private BooleanProperty m_LengthyWorkProperty;
+    //private BooleanProperty m_LengthyWorkProperty;
 
     public Bootstrapper() {
-        m_LengthyWorkProperty = new SimpleBooleanProperty(false);
+
+        
     }
 
     /**
@@ -63,7 +64,7 @@ public class Bootstrapper {
             dbPassword, dbDriver);
         
         DependencyManager.registerInstance(IConnectionFactory.class, factory);
-
+        factory.connect();
         return factory;
     }
 

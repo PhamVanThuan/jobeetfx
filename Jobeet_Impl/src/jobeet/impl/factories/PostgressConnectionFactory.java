@@ -76,7 +76,7 @@ public class PostgressConnectionFactory
         properties.put(Environment.DRIVER, m_Driver);
         properties.put(Environment.URL, url);
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("DolphinPU", properties);
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("JobeetPU", properties);
         m_EntityManager = factory.createEntityManager();
     }
 
